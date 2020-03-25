@@ -1,0 +1,102 @@
+PAREI EM 1 hora e 5 minutos dia 24
+CRIAÇÂO do 
+
+INCIDENT CONTROLLER
+
+https://youtu.be/GfnWvNSWMZE?t=3905
+
+
+
+
+
+Configurando o ambiente de trabalho
+
+#backend
+- cria a pasta do seu projeto
+- cria a pasta de backend
+- abre a pasta backend
+- no terminal digita:
+    npm init -y
+- abre a pasta backend no Visual Studio (no teminal: "code .")
+- abre um terminal dentro do VS Code, e digita:
+    npm install express
+
+- para executar o servidor:
+    node index.js
+
+- para nao precisar reiniciar o server toda vez (o -D coloca ele somenta nas dependencias de Desenvolvedor)
+    npm install nodemon -D
+
+- cria um script "start" no package.json
+    npm start (para rodar o servidor)
+
+
+#frontend
+- no terminal, na pasta raiz do projeto
+    npx create-react-app frontend
+
+- abre a pasta frontend no VS Code e abre um terminal no VS Code:
+    npm start
+
+
+
+#Banco de Dados
+    npm install knex
+    npm install sqlite3
+
+#Conectar com o DB (É NPX E NAO NPM)
+    npx knex init
+    
+#Adiciona no knexfile.js em "development: {"
+    migrations: {
+      directory: './src/database/migrations'
+    }
+    useNullAsDefault = true,
+
+#Cria a primeira migração *migração é um controle de versao das tabelas
+    npx knex migrate:make create_ongs   *** Create_ongs ou qualquer outro nome
+
+
+#Instalar CORS (permite que apenas o frontend possa acessar o backend)
+    npm install cors
+
+
+###### APPS
+INSOMNIA
+    Para testar metodos HTML
+
+
+##### NOTAS
+
+rotas: é o caminho completo:   
+    www.app.com.br/users
+
+recurso: é so o / pra frente
+    /users
+
+
+#### metodos HTML:
+    GET: Busca informação do back-end
+    POST: Cria informação no back-end
+    PUT: Alterar informação
+    DELETE: Duuuuhhhh
+
+##### REQUEST São os parametros que vem atraves do querry
+
+##### Parametros
+    QUERY PARAMS: Parametros enviados na rota apos "?" e servem pra filtros, paginação (usa ?)
+    ROUTE PARAMS: utilizados para identificar recursos (usa /)
+    REQUEST BODY: Corpo da requisição utilizado para criar ou alterar recursos
+
+
+
+############# Arquivos
+
+index.js 
+    é o arquivo principal do app
+
+routes.js
+    rotas
+
+package.json
+    onde ficam os pacotes usados e scripts
