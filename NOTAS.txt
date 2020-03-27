@@ -30,6 +30,9 @@ Configurando o ambiente de trabalho
 - cria um script "start" no package.json
     npm start (para rodar o servidor)
 
+#Instalar CORS (permite que apenas o frontend possa acessar o backend)
+    npm install cors
+
 
 #frontend
 - no terminal, na pasta raiz do projeto
@@ -38,6 +41,9 @@ Configurando o ambiente de trabalho
 - abre a pasta frontend no VS Code e abre um terminal no VS Code:
     npm start
 
+- npm install react-router-dom
+
+- npm install axios (faz a conexao http com o backend)
 
 
 #Banco de Dados
@@ -57,8 +63,7 @@ Configurando o ambiente de trabalho
     npx knex migrate:make create_ongs   *** Create_ongs ou qualquer outro nome
 
 
-#Instalar CORS (permite que apenas o frontend possa acessar o backend)
-    npm install cors
+
 
 
 ###### APPS
