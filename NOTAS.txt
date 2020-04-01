@@ -46,6 +46,24 @@ Configurando o ambiente de trabalho
 - npm install axios (faz a conexao http com o backend)
 
 
+#mobile
+- sudo npm install expo-cli --global
+- expo start mobile (mobile é o nome da pasta que vc quer criar para o seu projeto
+- yarn start (inicia o servidor expo)
+- npm install @react-navigation/native 
+- expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+- npm install @react-navigation/stack
+- npm install axios (fazer a conexão com a API)
+- npm install intl (para pacotes de internacionalização)
+
+
+#interação
+
+(para enviar email)
+expo install expo-mail-composer
+
+
+
 #Banco de Dados
     npm install knex
     npm install sqlite3
