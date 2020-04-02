@@ -30,8 +30,14 @@ Configurando o ambiente de trabalho
 - cria um script "start" no package.json
     npm start (para rodar o servidor)
 
-#Instalar CORS (permite que apenas o frontend possa acessar o backend)
+- Instalar CORS (permite que apenas o frontend possa acessar o backend)
     npm install cors
+
+- Para fazer validação
+    npm install celebrate
+
+- Para fazer testes
+    npm install jest
 
 
 #frontend
