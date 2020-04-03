@@ -37,8 +37,9 @@ Configurando o ambiente de trabalho
     npm install celebrate
 
 - Para fazer testes
-    npm install jest
-
+    npm install jest -d
+    npm install cross-env
+    npm install supertest -d
 
 #frontend
 - no terminal, na pasta raiz do projeto

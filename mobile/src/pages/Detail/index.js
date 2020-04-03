@@ -69,7 +69,7 @@ export default function Details(){
             
                 <View style={styles.actions}>
 
-                    <TouchableOpacity style={styles.action} onPress={sendWhatsapp}>
+                    <TouchableOpacity style={styles.action} onPress={navigation.navigate('Incidents')}>
                         <Text style={styles.actionText}>Whatsapp</Text>
                     </TouchableOpacity>
 

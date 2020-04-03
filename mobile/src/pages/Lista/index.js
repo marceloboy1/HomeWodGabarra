@@ -9,7 +9,7 @@ import api from '../../Services/api'
 import styles from './styles'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export default function Incidents(){
+export default function Lista(){
     const [incidents, setIncidents] = useState([]);
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
@@ -56,7 +56,7 @@ export default function Incidents(){
                 </Text>
             </View>
 
-            <Text style={styles.title}>Bem-vindo</Text>
+            <Text style={styles.title}>Crossfit</Text>
             <Text style={styles.description}>Escolha um dos casos para ser o herói.</Text>
         
             <FlatList
