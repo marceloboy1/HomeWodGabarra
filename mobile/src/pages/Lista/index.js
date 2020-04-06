@@ -4,6 +4,7 @@ import {Feather} from '@expo/vector-icons'
 import {useNavigation} from '@react-navigation/native'
 import logoImg from '../../assets/logo.png'
 
+
 import api from '../../Services/api'
 
 import styles from './styles'
@@ -16,7 +17,10 @@ export default function Lista(){
     const [loading, setLoading] = useState(false);
     
     const navigation = useNavigation();
-
+    
+    function navigateBack(){
+        navigation.goBack()
+    }
     function navigateToDetail(incident){
         navigation.navigate('Detail', { incident } );
     }
@@ -51,14 +55,16 @@ export default function Lista(){
         <View style={styles.container}>
             <View style={styles.header}>
                 <Image source={logoImg} />
-                <Text style={styles.headerText}>
-                    Total de <Text style={styles.headerTextBold}>{total} casos</Text>.
-                </Text>
+
+                <TouchableOpacity  onPress={navigateBack}>
+                    <Feather name="arrow-left" size={60} color="#ffcc00" />
+                </TouchableOpacity>
             </View>
 
-            <Text style={styles.title}>Crossfit</Text>
-            <Text style={styles.description}>Escolha um dos casos para ser o herói.</Text>
-        
+            <Text style={styles.title}>Escolha um dos vídeos</Text>
+            <Text style={styles.headerText}>
+                    Total de <Text style={styles.headerTextBold}>{total} vídeos</Text>.
+            </Text>
             <FlatList
                 data={incidents}
                 style={styles.incidentList}
@@ -70,26 +76,14 @@ export default function Lista(){
 
                     <View style={styles.incident}>
                                         
-                        <Text style={styles.incidentProperty}>ONG:</Text>
-                        <Text style={styles.incidentValue}>{incident.name}</Text>
-
-                        <Text style={styles.incidentProperty}>CASO:</Text>
-                        <Text style={styles.incidentValue}>{incident.title}</Text>
-
-                        <Text style={styles.incidentProperty}>VALOR:</Text>
-                        <Text style={styles.incidentValue}>
-                            {Intl.NumberFormat('pt-BR',{
-                                style: 'currency',
-                                currency: 'BRL'
-                            }).format(incident.value)}
-                        </Text>
-
+                        <Text style={styles.incidentProperty}>Lombar</Text>
+                        
+        
                         <TouchableOpacity 
                             style={styles.detailsButton} 
                             onPress={() => navigateToDetail(incident)}
                         >
-                            <Text style={styles.detailsButtonText}>Ver mais detalhes</Text>
-                            <Feather name='arrow-right' size={16} color="#e02041" />
+                            <Image style={styles.thumb} source={{uri: 'http://www.academiagabarra.com/wp-content/uploads/thumbs/video1.png'}} />
                         </TouchableOpacity>
                     </View>
                 )}

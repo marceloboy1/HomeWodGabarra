@@ -5,6 +5,7 @@ import Details from '../Detail';
 export default StyleSheet.create({
     
     container: {
+        backgroundColor: '#292924',
         flex: 1,
         paddingHorizontal: 24, 
         paddingTop: Constants.statusBarHeight + 20,
@@ -14,22 +15,23 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        
     },
-
     headerText: {
         fontSize: 15,
-        color: '#737380',
+        color: '#ffcc00',
     },
 
     headerTextBold: {
         fontWeight: 'bold',
     },
 
+    
     title:{
         fontSize: 30,
-        marginBottom: 16,
-        marginTop: 48,
-        color: '#13131a',
+        marginBottom: 0,
+        marginTop: 15,
+        color: '#ffcc00',
         fontWeight: 'bold',
     },
 
@@ -40,7 +42,7 @@ export default StyleSheet.create({
     },
 
     incidentList:{
-        marginTop: 32,
+        marginTop: 15,
     },
 
     incident:{
@@ -51,7 +53,7 @@ export default StyleSheet.create({
     },
 
     incidentProperty:{
-        fontSize: 14,
+        fontSize: 25,
         color: '#41414d',
         fontWeight: 'bold',
     },
@@ -75,6 +77,11 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         borderRadius: 8,
         fontSize: 15,
+    },
+    
+    thumb: {
+        width: 265,
+        height: 300,
     }
 
 
