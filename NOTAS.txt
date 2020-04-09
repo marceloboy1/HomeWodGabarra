@@ -1,7 +1,7 @@
 PAREI EM 1 hora e 5 minutos dia 24
 CRIAÇÂO do 
 
-INCIDENT CONTROLLER
+aula CONTROLLER
 
 https://youtu.be/GfnWvNSWMZE?t=3905
 
@@ -81,8 +81,8 @@ expo install expo-mail-composer
 #Adiciona no knexfile.js em "development: {"
     migrations: {
       directory: './src/database/migrations'
-    }
-    useNullAsDefault = true,
+    },
+    useNullAsDefault: true,
 
 #Cria a primeira migração *migração é um controle de versao das tabelas
     npx knex migrate:make create_ongs   *** Create_ongs ou qualquer outro nome

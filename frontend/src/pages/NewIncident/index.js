@@ -8,28 +8,35 @@ import './styles.css';
 
 import logoImg from "../../assets/logo.svg";
 
-export default function NewIncident(){
+export default function Newaula(){
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [value, setValue] = useState('');
+    const [categoria, setCategoria] = useState('');
+    const [intensidade, setIntensidade] = useState('');
+    const [video, setVideo] = useState('');
+    const [thumb, setThumb] = useState('');
     const history = useHistory();
     
-    const ongId = localStorage.getItem('ongId');
+    const professorId = localStorage.getItem('professorId');
     
-    async function handleNewIncident(e){ 
+    async function handleNewaula(e){ 
        e.preventDefault();
        
        const data = {
            title,
            description,
-           value
+           categoria,
+           intensidade,
+           video,
+           thumb,
+           
        };
 
         try{
-            await api.post('incidents', data,{
+            await api.post('aulas', data,{
                 headers: {
-                    authorization: ongId
+                    authorization: professorId
                 }
         })
         history.push('/profile');
@@ -43,7 +50,7 @@ export default function NewIncident(){
 
 
     return (
-        <div className="new-incident-container">
+        <div className="new-aula-container">
             <div className="content">
                 <section>
                     <img src={logoImg} alt="Be The Hero"/>
@@ -58,9 +65,9 @@ export default function NewIncident(){
 
                 </section>
 
-                <form onSubmit={handleNewIncident}>
+                <form onSubmit={handleNewaula}>
                     <input 
-                        placeholder="Título do caso"
+                        placeholder="Título"
                         value = {title}
                         onChange={e => setTitle(e.target.value)}
                     />
@@ -69,11 +76,17 @@ export default function NewIncident(){
                         value = {description}
                         onChange={e => setDescription(e.target.value)}
                     />
-                    <input 
-                        placeholder="Valor em reais"
-                        value = {value}
-                        onChange={e => setValue(e.target.value)}
-                    />
+                    <Dropdown>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                            Dropdown Button
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
                     <button className="button" type="submit">Cadastrar</button>
 
                 </form>

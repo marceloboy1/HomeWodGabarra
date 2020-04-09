@@ -11,7 +11,7 @@ import logoImg from '../../assets/logo.png'
 export default function Details(){
     const navigation = useNavigation();
     const route = useRoute()
-    const incident = route.params.incident;
+    const aula = route.params.aula;
     
     function navigateBack(){
         navigation.goBack()
@@ -34,7 +34,7 @@ export default function Details(){
                 </TouchableOpacity>
             </View>
 
-            <View style={styles.incident}>
+            <View style={styles.aula}>
 
             <Video
                 source={{ uri: 'http://www.academiagabarra.com/wp-content/uploads/videos/C0002.MP4'}}

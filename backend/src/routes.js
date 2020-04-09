@@ -1,42 +1,46 @@
 const { celebrate, Joi, Segments } = require('celebrate');
-const express = require('express');
+const routes = require('express').Router();
+
+const multer = require('multer');
+const multerConfig = require('./config/multer')
 
 const SessionController = require('./controllers/SessionController')
-const OngController = require('./controllers/OngController')
-const IncidentController = require('./controllers/IncidentController')
+const ProfessoresController = require('./controllers/ProfessoresController')
+const AulaController = require('./controllers/AulaController')
 const ProfileController = require('./controllers/ProfileController')
 
+const Post = require('./controllers/AulaController')
 
+routes.post("/upload", multer(multerConfig).single("file"), (req, res) => {
+    
+    Post.create(req, res)
 
-const routes = express.Router();
+});
 
 routes.post('/sessions', SessionController.create);
 
-routes.get('/ongs', OngController.index);
+routes.get('/professores', ProfessoresController.index);
 
-routes.post('/ongs', celebrate({
+routes.post('/professores', celebrate({
     [Segments.BODY]: Joi.object().keys({ 
         name: Joi.string().required(),
-        email: Joi.string().required().email(),
         whatsapp: Joi.string().required().min(10).max(11),
-        city: Joi.string().required(),
-        uf: Joi.string().required().length(2),
     })
-}), OngController.create);
+}), ProfessoresController.create);
 
-routes.get('/incidents', celebrate({
+routes.get('/aulas', celebrate({
     [Segments.QUERY]: Joi.object().keys({
         page: Joi.number(),
     })
-}), IncidentController.index);
+}), AulaController.index);
 
-routes.post('/incidents', IncidentController.create);
+routes.post('/aulas', AulaController.create);
 
-routes.delete('/incidents/:id', celebrate({
+routes.delete('/aulas/:id', celebrate({
     [Segments.PARAMS]: Joi.object().keys({
         id: Joi.number().required(),
     })
-}), IncidentController.delete);
+}), AulaController.delete);
 
 routes.get('/profile', celebrate({
     [Segments.HEADERS]: Joi.object({

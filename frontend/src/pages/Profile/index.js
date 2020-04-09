@@ -10,9 +10,9 @@ import api from '../../services/api'
 
 export default function Profile(){
 
-    const [incidents, setIncidents] = useState([]);
+    const [aulas, setaulas] = useState([]);
     
-    const ongId = localStorage.getItem('ongId');
+    const professorId = localStorage.getItem('professorId');
     const ongName = localStorage.getItem('ongName');
 
     const history = useHistory();
@@ -20,21 +20,21 @@ export default function Profile(){
     useEffect(() => {
         api.get('profile',{
             headers: {
-                authorization: ongId,
+                authorization: professorId,
             }
         }).then(response => {
-            setIncidents(response.data);
+            setaulas(response.data);
         }) 
-    }, [ongId])
+    }, [professorId])
 
-    async function handleDeleteIncident(id){
+    async function handleDeleteaula(id){
         try{
-            await api.delete(`incidents/${id}`, {
+            await api.delete(`aulas/${id}`, {
                 headers:{
-                    authorization: ongId,
+                    authorization: professorId,
                 }
             })
-            setIncidents(incidents.filter(incident => incident.id !== id))
+            setaulas(aulas.filter(aula => aula.id !== id))
         }
         catch(err){
             alert('Erro ao deletar caso, tente novamente');
@@ -52,7 +52,7 @@ export default function Profile(){
                 <img src={logoImg}alt="Be the Hero"/>
                 <spam>Bem vinda, {ongName}</spam>
 
-                <Link className="button" to="/incidents/new">Cadastrar novo caso</Link>
+                <Link className="button" to="/aulas/new">Cadastrar novo caso</Link>
                 <button type="button">
                     <FiPower onClick={(handleLogout)} size={18} color="#e02041"/>
                 </button>
@@ -61,19 +61,19 @@ export default function Profile(){
             <h1> Casos Cadastrados</h1>
 
             <ul>
-                {incidents.map(incident => (
-                    <li key={incident.id}>
+                {aulas.map(aula => (
+                    <li key={aula.id}>
                         <strong>CASO:</strong>
-                        <p>{incident.title}</p>
+                        <p>{aula.title}</p>
 
                         <strong>DESCRIÇÃO</strong>
-                        <p>{incident.description}</p>
+                        <p>{aula.description}</p>
 
                         <strong>VALOR</strong>
-                        <p>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL'}).format(incident.value)}</p>
+                        <p>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL'}).format(aula.value)}</p>
 
                         <button type="button">
-                            <FiTrash2 onClick={() => handleDeleteIncident(incident.id)} size={20} color="#a8a8b3" />
+                            <FiTrash2 onClick={() => handleDeleteaula(aula.id)} size={20} color="#a8a8b3" />
                         </button>
                     </li>                    
                 ))}

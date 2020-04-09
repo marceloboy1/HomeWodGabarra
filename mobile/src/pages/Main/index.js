@@ -1,6 +1,5 @@
 import React from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native'
-import {Feather} from '@expo/vector-icons'
 import { Text, View, Image, TouchableOpacity, Linking } from 'react-native'
 import styles from './styles'
 
@@ -40,6 +39,11 @@ export default function Main(){
 
                 <TouchableOpacity style={styles.action} onPress={() => navigation.push('Idoso')}>
                     <Text style={styles.actionText}>Idoso</Text>
+                </TouchableOpacity>
+
+
+                <TouchableOpacity style={styles.action} onPress={() => navigation.push('Upload')}>
+                    <Text style={styles.actionText}>Upload</Text>
                 </TouchableOpacity>
 
             </View>

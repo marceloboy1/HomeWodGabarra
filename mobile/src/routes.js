@@ -10,6 +10,7 @@ import Crossfit from './pages/Crossfit'
 import Idoso from './pages/Idoso'
 import Detail from './pages/Detail'
 import Lista from './pages/Lista'
+import Upload from './pages/Upload'
 
 export default function Routes(){
 return(
@@ -22,6 +23,7 @@ return(
                 <AppStack.Screen name="Idoso" component={Idoso} />
                 <AppStack.Screen name="Detail" component={Detail} />
                 <AppStack.Screen name="Lista" component={Lista} />
+                <AppStack.Screen name="Upload" component={Upload} />
 
             </AppStack.Navigator>
         </NavigationContainer>

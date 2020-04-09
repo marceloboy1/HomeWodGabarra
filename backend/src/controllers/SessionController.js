@@ -6,17 +6,17 @@ module.exports = {
 
         const { id }  = request.body;
         
-        const ong = await connection('ongs')
+        const professor = await connection('professores')
             .where('id', id)
             .select('name')
             .first();
 
-        if (!ong) {
-            return response.status(400).json({error: "No ONG found with this ID"});
+        if (!professor) {
+            return response.status(400).json({error: "ID inválido"});
 
         }
 
-        return response.json(ong);
+        return response.json(professor);
     }
 
 }

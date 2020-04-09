@@ -17,7 +17,7 @@ export default StyleSheet.create({
         
     },
 
-    incident:{
+    aula:{
         padding: 24,
         borderRadius: 8,
         backgroundColor: '#FFF',

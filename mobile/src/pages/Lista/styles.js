@@ -41,24 +41,24 @@ export default StyleSheet.create({
         color: '#737380',
     },
 
-    incidentList:{
+    aulaList:{
         marginTop: 15,
     },
 
-    incident:{
+    aula:{
         padding: 24,
         borderRadius: 8,
         backgroundColor: '#FFF',
         marginBottom: 16,
     },
 
-    incidentProperty:{
+    aulaProperty:{
         fontSize: 25,
         color: '#41414d',
         fontWeight: 'bold',
     },
 
-    incidentValue: {
+    aulaValue: {
         marginTop: 8,
         fontSize: 15,
         marginBottom: 24,

@@ -11,7 +11,7 @@ import styles from './styles'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function Lista(){
-    const [incidents, setIncidents] = useState([]);
+    const [aulas, setaulas] = useState([]);
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
@@ -21,34 +21,34 @@ export default function Lista(){
     function navigateBack(){
         navigation.goBack()
     }
-    function navigateToDetail(incident){
-        navigation.navigate('Detail', { incident } );
+    function navigateToDetail(aula){
+        navigation.navigate('Detail', { aula } );
     }
     
-    async function loadIncidents(){
+    async function loadaulas(){
 
         if (loading) {
             return;
         }
 
-        if (total > 0 && incidents.length == total){
+        if (total > 0 && aulas.length == total){
             return;
         }
 
         setLoading(true);
 
-        const response = await api.get('incidents', {
+        const response = await api.get('aulas', {
             params: {page}
         });
 
-        setIncidents([... incidents, ... response.data]);
+        setaulas([... aulas, ... response.data]);
         setTotal(response.headers['x-total-count']);
         setPage(page + 1);
         setLoading(false);
     }
 
     useEffect(() => {
-        loadIncidents();
+        loadaulas();
     }, []);
 
     return(
@@ -66,22 +66,22 @@ export default function Lista(){
                     Total de <Text style={styles.headerTextBold}>{total} vídeos</Text>.
             </Text>
             <FlatList
-                data={incidents}
-                style={styles.incidentList}
-                keyExtractor={incident => String(incident.id)}
+                data={aulas}
+                style={styles.aulaList}
+                keyExtractor={aula => String(aula.id)}
                 //showsVerticalScrollIndicator = {false}
-                onEndReached={loadIncidents}
+                onEndReached={loadaulas}
                 onEndReachedThreshold={0.2}
-                renderItem={({ item: incident }) => (
+                renderItem={({ item: aula }) => (
 
-                    <View style={styles.incident}>
+                    <View style={styles.aula}>
                                         
-                        <Text style={styles.incidentProperty}>Lombar</Text>
+                        <Text style={styles.aulaProperty}>Lombar</Text>
                         
         
                         <TouchableOpacity 
                             style={styles.detailsButton} 
-                            onPress={() => navigateToDetail(incident)}
+                            onPress={() => navigateToDetail(aula)}
                         >
                             <Image style={styles.thumb} source={{uri: 'http://www.academiagabarra.com/wp-content/uploads/thumbs/video1.png'}} />
                         </TouchableOpacity>
