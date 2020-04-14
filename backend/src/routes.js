@@ -11,7 +11,7 @@ const ProfileController = require('./controllers/ProfileController')
 
 const Post = require('./controllers/AulaController')
 
-routes.post("/upload", multer(multerConfig).single("file"), (req, res) => {
+routes.post('/upload', multer(multerConfig).single("file"), (req, res) => {
     
     Post.create(req, res)
 

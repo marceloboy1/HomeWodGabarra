@@ -6,8 +6,6 @@ exports.up = function(knex) {
       //  table.string('categoria').notNullable();
       //  table.string('intensidade').notNullable();
         table.string('url').notNullable();
-        table.string('videoName').notNullable();
-      //  table.string('thumb').notNullable();
         table.string('professor_id').notNullable();
         
         table.foreign('professor_id').references('id').inTable('professores');
