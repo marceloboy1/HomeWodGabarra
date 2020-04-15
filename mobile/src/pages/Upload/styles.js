@@ -6,10 +6,15 @@ export default StyleSheet.create({
     container: {
         backgroundColor: '#292924',
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
         paddingHorizontal: 24, 
         paddingTop: Constants.statusBarHeight + 20,
+    },
+
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        
     },
 
     logo: {
@@ -18,25 +23,39 @@ export default StyleSheet.create({
         marginBottom: 20,
     },
 
-    instructions: {
-        color: '#888',
-        fontSize: 18,
-        marginHorizontal: 15,
-        marginBottom: 10,
+    buttonGroup: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%',
+        marginTop: 10,
+        borderRadius: 8,
+        
     },
 
-    thumbnail: {
-        width: 300,
-        height: 300,
-        resizeMode: "contain"
+    group: {
+        backgroundColor: "#ffcc00",
+        padding: 10,
+        borderRadius: 3,
+        height: 50,
+        width: '33%',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
-    
+  
+    groupText:{
+        color: '#292924',
+        fontSize: 15,
+        fontWeight: 'bold',
+
+    },
+
     action: {
         backgroundColor: "#ffcc00",
         marginTop: 10,
         padding: 10,
         borderRadius: 8,
-        height: 70,
+        height: 60,
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
@@ -52,4 +71,27 @@ export default StyleSheet.create({
         fontSize: 60,
         color: "#ffcc00",
      },
+
+     form: {
+        marginTop: 10,
+        backgroundColor: "#fff",
+        height: 50,
+        width: "100%",
+        borderRadius: 8
+     },
+
+     formField: {
+        marginTop: 10,
+        backgroundColor: "#fff",
+        height: 150,
+        width: "100%",
+        borderRadius: 8
+     },
+
+     inputText:{
+        color: '#292924',
+        fontSize: 20,
+        fontWeight: 'bold',
+        padding: 10,
+    },
 });
