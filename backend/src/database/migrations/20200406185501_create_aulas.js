@@ -3,11 +3,10 @@ exports.up = function(knex) {
         table.increments();
         table.string('title').notNullable();
         table.string('description').notNullable();
-      //  table.string('categoria').notNullable();
-      //  table.string('intensidade').notNullable();
+        table.string('categoria').notNullable();
+        table.string('intensidade').notNullable();
         table.string('url').notNullable();
         table.string('professor_id').notNullable();
-        
         table.foreign('professor_id').references('id').inTable('professores');
     });
 };

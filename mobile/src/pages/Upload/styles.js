@@ -94,4 +94,10 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         padding: 10,
     },
+
+    buttonContainer: {
+        backgroundColor: '#292924',
+        flex: 1,
+        padding: 10,
+    },
 });

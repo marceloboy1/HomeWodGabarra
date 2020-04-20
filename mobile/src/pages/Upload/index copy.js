@@ -1,82 +1,208 @@
-import FormData from 'form-data';
-import axios from 'axios';
 import React, { useState } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View, TextInput} from 'react-native';
+
 import * as ImagePicker from 'expo-image-picker';
-import { Video } from 'expo-av';
+import Constants from 'expo-constants';
+import * as Permissions from 'expo-permissions'
+import Video from 'expo-av'
+
+import {Feather} from '@expo/vector-icons'
+import {useNavigation} from '@react-navigation/native'
+
 import styles from './styles'
+import logoImg from '../../assets/logo.png'
 
-const createFormData = (photo, body) => {
-  const data = new FormData();
-  data.append('file', {
-      name: photo.filename,
-      uri: Platform.OS === 'android' ? photo.uri : photo.uri.replace('file://', ''),
-  });
+import { ButtonGroup } from 'react-native-elements';
 
-  Object.keys(body).forEach(key => {
-      data.append(key, body[key]);
-  });
+class BtnGroup extends React.Component {
 
-  return data;
-};
-
-
-export default function Upload() {
-  let [selectedImage, setSelectedImage] = useState(null);
- 
-  let openImagePickerAsync = async () => {
-    let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
-
-    if (permissionResult.granted === false) {
-      alert('Permission to access camera roll is required!');
-      return;
+  constructor () {
+    super()
+    this.state = {
+      selectedIndex: 0
     }
-
-    let pickerResult = await ImagePicker.launchImageLibraryAsync({mediaTypes: ImagePicker.MediaTypeOptions.Videos,});
-
-    if (pickerResult.cancelled === true) {
-      return;
+    this.updateIndex = this.updateIndex.bind(this)
+    
+  }
+  
+  updateIndex (selectedIndex) {
+      
+      this.setState({selectedIndex})
+      this.props.onChange(selectedIndex)
+      console.log(selectedIndex)
     }
+  
 
-    setSelectedImage({ 
-      localUri: pickerResult.uri,
-      name: pickerResult.name,
-      type: pickerResult.type,
-      widht: pickerResult.width,
-      height: pickerResult.height
-    });
-  };
 
-  if (selectedImage !== null) {
+  render () {
+    const buttons = this.props.buttons;
+    const { selectedIndex } = this.state
     
     return (
-      
-      <View style={styles.container}>
-        <Video
-                source={{ uri: selectedImage.localUri}}
-                rate={1.0}
-                volume={1.0}
-                muted={false}
-                useNativeControls={true}
-                resizeMode="cover"
-                usePoster = {true}
-                style={{ width: selectedImage.widht /2 , height: selectedImage.height / 2 }}
-         />
-        
-      </View>
-    );
+      <ButtonGroup
+        onPress={this.updateIndex}
+        selectedIndex={selectedIndex}
+        buttons={buttons}
+        containerStyle={{height: 50}}
+      />
+    )
+  }
+}
+
+export default function Upload() {
+
+  const navigation = useNavigation();
+
+  function navigateBack(){
+      navigation.goBack()
   }
 
-  return (
-    <View style={styles.container}>
-      <Image source={{ uri: 'https://i.imgur.com/TkIrScD.png' }} style={styles.logo} />
-      <Text style={styles.instructions}>
-        To share a photo from your phone with a friend, just press the button below!
-      </Text>
+  const [video, setVideo] = useState({});
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [intensidade, setIntensidade] = useState(0);
+  const [categoria, setCategoria] = useState(0);
 
-      <TouchableOpacity onPress={openImagePickerAsync} style={styles.action}>
-        <Text style={styles.actionText}>Pick a photo</Text>
+  async function videoPicker() {
+    
+    if (Constants.platform.ios) {
+      const {status} = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
+      if (status != "granted") {
+         alert("Permissão necessária");
+         return;
+      };
+    }
+
+    const file = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Videos
+    });
+
+    if (file.cancelled){
+      return;
+    }
+
+
+    if (!file.uri){
+      return;
+    }
+
+    if (file.uri){
+      console.log("TESTE")
+      setVideo(file)
+      return( 
+      <View style={styles.container}>
+        <View style={styles.header}>
+          
+          <Image source={logoImg} />
+          <TouchableOpacity onPress={navigateBack}>
+            <Feather style={styles.back} name="arrow-left"/>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.form}>
+          <TextInput 
+            style={styles.inputText}
+            placeholder="Escolha o nome"
+            onChangeText={title => setTitle(title)}
+            defaultValue={title}
+          />
+        </View>
+
+        <View style={styles.formField}>
+          <TextInput 
+            style={styles.inputText}
+            placeholder="Descrição"
+            onChangeText={description => setDescription(description)}
+            defaultValue={description}
+            multiline={true}
+          />
+        </View>
+
+
+        <BtnGroup onChange={handleCategoria} buttons={["Pilates", "Crossfit", "Idoso"]} />
+        <BtnGroup onChange={handleIntensidade} buttons={["Iniciante", "Intermediário", "Avançado"]} />
+
+        
+        <TouchableOpacity onPress={videoPicker} style={styles.action}>
+          <Text style={styles.actionText}>Escolha o video</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={uploadVideo} style={styles.action}>
+          <Text style={styles.actionText}>Fazer Upload</Text>
+        </TouchableOpacity>
+
+      </View>
+    )
+    }
+  }
+
+  function handleIntensidade(receivedIndex){
+    setIntensidade(receivedIndex);
+    console.log("Intensidade");
+    console.log(intensidade)
+  }
+
+  function handleCategoria(receivedIndex){
+    setCategoria(receivedIndex);
+    console.log("Categoria");
+    console.log(categoria)
+  }
+
+  async function uploadVideo(){
+
+    var movVideo = {
+      uri: video.uri,
+      type: 'video/mp4',
+      name: (title)+'.mp4'
+    }
+
+    var body = new FormData();
+    body.append('file', movVideo);
+    body.append('title', title);
+    body.append('description', description);
+    body.append('intensidade', intensidade);
+    body.append('categoria', categoria);
+
+    fetch('http://192.168.0.106:3333/upload', {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data',
+        'authorization': '2963d222'
+      },
+      body: body,
+    }).then((response) => response.json())
+      .then((responseJson) => {
+        setDescription("")
+        setTitle("")
+        setVideo()
+        console.log(responseJson);
+    });
+  }
+
+
+ return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        
+        <Image source={logoImg} />
+        <Image
+          source={video.uri}
+          style={{ width:50, height: 100}}
+        />
+
+        <TouchableOpacity onPress={navigateBack}>
+          <Feather style={styles.back} name="arrow-left"/>
+        </TouchableOpacity>
+      </View>
+
+      
+      <TouchableOpacity onPress={videoPicker} style={styles.action}>
+        <Text style={styles.actionText}>Escolha o video</Text>
       </TouchableOpacity>
+
     </View>
-  );
+  )
 }
+  

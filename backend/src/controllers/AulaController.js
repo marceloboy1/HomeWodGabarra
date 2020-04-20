@@ -1,4 +1,3 @@
-const connection = require('../database/connection');
 
 module.exports = {
 
@@ -27,12 +26,14 @@ module.exports = {
     async create(request, response){
         
         console.log(request.body)
-        const { title, description } = request.body;
+        const { title, description, categoria, intensidade } = request.body;
         const professor_id = request.headers.authorization;
         const url = "../../tmp"
         const [id] = await connection('aulas').insert({
             title,
             description,
+            intensidade,
+            categoria,
             professor_id,
             url,
         });

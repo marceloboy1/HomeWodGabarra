@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, Text, TouchableOpacity, View, TextInput} from 'react-native';
+import { Image, Text, TouchableOpacity, View, TextInput, Alert} from 'react-native';
 
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
@@ -8,11 +8,45 @@ import * as Permissions from 'expo-permissions'
 import {Feather} from '@expo/vector-icons'
 import {useNavigation} from '@react-navigation/native'
 
-import Axios from "axios";
 import styles from './styles'
-
 import logoImg from '../../assets/logo.png'
-import ButtonGroup from 'react-native-button-group';
+
+import { ButtonGroup } from 'react-native-elements';
+
+class BtnGroup extends React.Component {
+
+  constructor () {
+    super()
+    this.state = {
+      selectedIndex: 0
+    }
+    this.updateIndex = this.updateIndex.bind(this)
+    
+  }
+  
+  updateIndex (selectedIndex) {
+      
+      this.setState({selectedIndex})
+      this.props.onChange(selectedIndex)
+      console.log(selectedIndex)
+    }
+  
+
+
+  render () {
+    const buttons = this.props.buttons;
+    const { selectedIndex } = this.state
+    
+    return (
+      <ButtonGroup
+        onPress={this.updateIndex}
+        selectedIndex={selectedIndex}
+        buttons={buttons}
+        containerStyle={{height: 50}}
+      />
+    )
+  }
+}
 
 export default function Upload() {
 
@@ -25,16 +59,11 @@ export default function Upload() {
   const [video, setVideo] = useState({});
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [categoria, setCategoria] = useState('');
-  const [intensidade, setIntensida] = useState('');
-  
-
-  //função que da vida aos grupos de botçoes
-  // function groupButtonCategoria(value){
-  //   setCategoria(value)
-  // }
+  const [intensidade, setIntensidade] = useState(0);
+  const [categoria, setCategoria] = useState(0);
 
   async function videoPicker() {
+    
     if (Constants.platform.ios) {
       const {status} = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 
@@ -60,11 +89,20 @@ export default function Upload() {
     setVideo(file)
   }
 
+  function handleIntensidade(receivedIndex){
+    setIntensidade(receivedIndex);
+    console.log("Intensidade");
+    console.log(intensidade)
+  }
 
+  function handleCategoria(receivedIndex){
+    setCategoria(receivedIndex);
+    console.log("Categoria");
+    console.log(categoria)
+  }
 
   async function uploadVideo(){
-    
-    console.log(video.uri)
+
     var movVideo = {
       uri: video.uri,
       type: 'video/mp4',
@@ -75,18 +113,20 @@ export default function Upload() {
     body.append('file', movVideo);
     body.append('title', title);
     body.append('description', description);
+    body.append('intensidade', intensidade);
+    body.append('categoria', categoria);
 
     fetch('http://192.168.0.106:3333/upload', {
       method: "POST",
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'multipart/form-data',
-        'authorization': '2963d222'
+        'authorization': '0ba27157'
       },
       body: body,
     }).then((response) => response.json())
       .then((responseJson) => {
-        //only the first frame of the video got uploaded
+        Alert.alert("UPLOAD COMPLETO");
         console.log(responseJson);
     });
   }
@@ -95,12 +135,13 @@ export default function Upload() {
  return (
     <View style={styles.container}>
       <View style={styles.header}>
+        
         <Image source={logoImg} />
         <TouchableOpacity onPress={navigateBack}>
           <Feather style={styles.back} name="arrow-left"/>
         </TouchableOpacity>
       </View>
-      
+
       <View style={styles.form}>
         <TextInput 
           style={styles.inputText}
@@ -119,31 +160,12 @@ export default function Upload() {
           multiline={true}
         />
       </View>
+
+
+      <BtnGroup onChange={handleCategoria} buttons={["Pilates", "Crossfit", "Idoso"]} />
+      <BtnGroup onChange={handleIntensidade} buttons={["Iniciante", "Intermediário", "Avançado"]} />
+
       
-      <View style={styles.buttonGroup}>
-        <TouchableOpacity onPress={() => {}} style={styles.group}>
-          <Text style={styles.groupText}>Pilates</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}} style={styles.group}>
-          <Text style={styles.groupText}>Crossfit</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}} style={styles.group}>
-          <Text style={styles.groupText}>Idoso</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.buttonGroup}>
-        <TouchableOpacity onPress={() => {}} style={styles.group}>
-          <Text style={styles.groupText}>Iniciante</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}} style={styles.group}>
-          <Text style={styles.groupText}>Intermed.</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}} style={styles.group}>
-          <Text style={styles.groupText}>Avançado</Text>
-        </TouchableOpacity>
-      </View>
-
       <TouchableOpacity onPress={videoPicker} style={styles.action}>
         <Text style={styles.actionText}>Escolha o video</Text>
       </TouchableOpacity>
