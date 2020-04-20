@@ -121,7 +121,7 @@ export default function Upload() {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'multipart/form-data',
-        'authorization': '0ba27157'
+        'authorization': 'c99afe28'
       },
       body: body,
     }).then((response) => response.json())

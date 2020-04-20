@@ -1,3 +1,4 @@
+const connection = require('../database/connection');
 
 module.exports = {
 
@@ -37,7 +38,7 @@ module.exports = {
             professor_id,
             url,
         });
-
+        console.log("ENTRADA CRIADA COM SUCESSO")
         return response.json({ url, title});
     
     },
