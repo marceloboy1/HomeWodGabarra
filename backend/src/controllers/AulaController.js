@@ -1,4 +1,5 @@
 const connection = require('../database/connection');
+const multer = require('../config/multer')
 
 module.exports = {
 
@@ -7,8 +8,6 @@ module.exports = {
         const { page = 1 } = request.query;
 
         const [count] = await connection('aulas').count();
-
-        console.log(count);
 
         const aulas = await connection('aulas')
         .join('professores', 'professores.id', '=', 'aulas.professor_id')
@@ -26,7 +25,7 @@ module.exports = {
   
     async create(request, response){
         
-        console.log(request.body)
+        console.log(multer.storage)
         const { title, description, categoria, intensidade } = request.body;
         const professor_id = request.headers.authorization;
         const url = "../../tmp"
@@ -40,7 +39,6 @@ module.exports = {
         });
         console.log("ENTRADA CRIADA COM SUCESSO")
         return response.json({ url, title});
-    
     },
 
     async delete(request, response){

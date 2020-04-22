@@ -100,4 +100,17 @@ export default StyleSheet.create({
         flex: 1,
         padding: 10,
     },
+
+    disabled: {
+        backgroundColor: "#918d7a",
+        marginTop: 10,
+        padding: 10,
+        borderRadius: 8,
+        height: 60,
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+
 });

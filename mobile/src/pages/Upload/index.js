@@ -61,6 +61,7 @@ export default function Upload() {
   const [description, setDescription] = useState('');
   const [intensidade, setIntensidade] = useState(0);
   const [categoria, setCategoria] = useState(0);
+  const [isPicked, setPicked] = useState(false);
 
   async function videoPicker() {
     
@@ -77,10 +78,6 @@ export default function Upload() {
     const file = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
     });
-    console.log("Video escolhido");
-    console.log(file);
-
-    console.log("TESTE");
     if (file.cancelled){
       console.log("CANCELADO");
       return;
@@ -90,9 +87,10 @@ export default function Upload() {
       console.log("URI INVALIDA");
       return;
     }
-
-    console.log("SUCESSO");
+    console.log(isPicked)
     setVideo(file);
+    setPicked(true);
+    console.log(isPicked)
   }
 
   function handleIntensidade(receivedIndex){
@@ -130,7 +128,10 @@ export default function Upload() {
         'authorization': 'c99afe28'
       },
       body: body,
-    }).then((response) => response.json())
+    }).then((response) => {
+      setPicked(false)
+      response.json()
+    })
       .then((responseJson) => {
         Alert.alert("UPLOAD COMPLETO");
         console.log(responseJson);
@@ -176,7 +177,7 @@ export default function Upload() {
         <Text style={styles.actionText}>Escolha o video</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={uploadVideo} style={styles.action}>
+      <TouchableOpacity disabled={!isPicked} onPress={uploadVideo} style={!isPicked ? styles.disabled : styles.action}>
         <Text style={styles.actionText}>Fazer Upload</Text>
       </TouchableOpacity>
 
