@@ -73,20 +73,26 @@ export default function Upload() {
       };
     }
 
+    console.log("Abrindo biblioteca"); 
     const file = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Videos
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
     });
+    console.log("Video escolhido");
+    console.log(file);
 
+    console.log("TESTE");
     if (file.cancelled){
+      console.log("CANCELADO");
       return;
     }
-
 
     if (!file.uri){
+      console.log("URI INVALIDA");
       return;
     }
 
-    setVideo(file)
+    console.log("SUCESSO");
+    setVideo(file);
   }
 
   function handleIntensidade(receivedIndex){

@@ -21,7 +21,7 @@ module.exports = {
     }),
     
     limits:{
-        fileSize: 1000 * 1024 * 1024 
+        fileSize: 200 * 1024 * 1024 
     },
 
     fileFilter:(req, file, cb) => {
