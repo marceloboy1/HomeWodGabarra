@@ -76,7 +76,7 @@ export default function Upload() {
 
     console.log("Abrindo biblioteca"); 
     const file = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.Video,
     });
     if (file.cancelled){
       console.log("CANCELADO");

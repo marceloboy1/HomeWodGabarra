@@ -21,7 +21,10 @@ export default function Details(){
         Linking.openURL(`whatsapp://send?phone=55${16981156669}`);
     }
 
-
+    const title = (unescape(aula.title)+'.mp4')
+    
+    console.log("CURDEO")
+    
     return(
         
         <View style={styles.container}>
@@ -37,7 +40,7 @@ export default function Details(){
             <View style={styles.aula}>
 
             <Video
-                source={{ uri: 'http://www.academiagabarra.com/wp-content/uploads/videos/C0002.MP4'}}
+                source={{ uri: 'http://192.168.0.106:3333/video'}}
                 posterSource={{ uri: '../../assets/splash.png'}}
                 rate={1.0}
                 volume={1.0}

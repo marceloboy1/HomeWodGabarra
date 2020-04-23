@@ -3,6 +3,7 @@ import { View, Image, Text, FlatList } from 'react-native'
 import {Feather} from '@expo/vector-icons'
 import {useNavigation} from '@react-navigation/native'
 import logoImg from '../../assets/logo.png'
+import { Video } from 'expo-av';
 
 
 import api from '../../Services/api'
@@ -45,6 +46,7 @@ export default function Lista(){
         setTotal(response.headers['x-total-count']);
         setPage(page + 1);
         setLoading(false);
+        console.log(aulas)
     }
 
     useEffect(() => {
@@ -69,21 +71,30 @@ export default function Lista(){
                 data={aulas}
                 style={styles.aulaList}
                 keyExtractor={aula => String(aula.id)}
-                //showsVerticalScrollIndicator = {false}
+                
                 onEndReached={loadaulas}
                 onEndReachedThreshold={0.2}
                 renderItem={({ item: aula }) => (
 
                     <View style={styles.aula}>
                                         
-                        <Text style={styles.aulaProperty}>Lombar</Text>
-                        
-        
+                        <Text style={styles.aulaProperty}>{aula.title}</Text>
+                      
                         <TouchableOpacity 
                             style={styles.detailsButton} 
                             onPress={() => navigateToDetail(aula)}
                         >
-                            <Image style={styles.thumb} source={{uri: 'http://www.academiagabarra.com/wp-content/uploads/thumbs/video1.png'}} />
+                            <Video
+                                source={{ uri: 'http://192.168.0.106:3333/video/'}}
+                                posterSource={{ uri: '../../assets/splash.png'}}
+                                rate={1.0}
+                                volume={1.0}
+                                muted={false}
+                                useNativeControls={true}
+                                resizeMode="cover"
+                                usePoster = {false}
+                                style={{ width: 265, height: 300 }}
+                            />
                         </TouchableOpacity>
                     </View>
                 )}

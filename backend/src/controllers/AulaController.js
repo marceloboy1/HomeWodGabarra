@@ -10,12 +10,9 @@ module.exports = {
         const [count] = await connection('aulas').count();
 
         const aulas = await connection('aulas')
-        .join('professores', 'professores.id', '=', 'aulas.professor_id')
         .limit(5)
         .offset((page -1) * 5)
-        .select(['aulas.*', 
-        'professores.name', 
-        'professores.whatsapp']);
+        .select(['aulas.*']);
 
         response.header('X-Total-Count', count['count(*)'])
         
