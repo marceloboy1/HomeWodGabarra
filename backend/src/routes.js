@@ -52,9 +52,10 @@ routes.get('/profile', celebrate({
 }), ProfileController.index);
 
 
-routes.get('/video', function(req, res) {
+routes.get('/video/:title', function(req, res) {
     
-    const path = '../backend/tmp/Pilates.mp4'
+    title = req.params.title
+    const path = '../backend/tmp/'+title+'.mp4'
     const stat = fs.statSync(path)
     const fileSize = stat.size
     const range = req.headers.range

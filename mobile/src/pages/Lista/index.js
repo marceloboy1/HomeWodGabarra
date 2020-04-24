@@ -85,15 +85,11 @@ export default function Lista(){
                             onPress={() => navigateToDetail(aula)}
                         >
                             <Video
-                                source={{ uri: 'http://192.168.0.106:3333/video/'}}
-                                posterSource={{ uri: '../../assets/splash.png'}}
+                                source={{ uri: `http://192.168.0.106:3333/video/${aula.title}`}}
                                 rate={1.0}
                                 volume={1.0}
                                 muted={false}
-                                useNativeControls={true}
-                                resizeMode="cover"
-                                usePoster = {false}
-                                style={{ width: 265, height: 300 }}
+                                style={{ width: 300, height: 300 }}
                             />
                         </TouchableOpacity>
                     </View>
