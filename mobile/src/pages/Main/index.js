@@ -28,21 +28,21 @@ export default function Main(){
 
             <View style={styles.actions}>
 
-                <TouchableOpacity style={styles.action} onPress={() => navigation.push('Lista')}>
+                <TouchableOpacity style={styles.action} onPress={() => navigation.navigate('Lista', {categoria: '0'})}>
                     <Text style={styles.actionText}>Pilates</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.action} onPress={() => navigation.push('Lista')}>
+                <TouchableOpacity style={styles.action} onPress={() => navigation.navigate('Lista', {categoria: '1'})}>
                     <Text style={styles.actionText}>Crossfit</Text>
                 </TouchableOpacity>
 
 
-                <TouchableOpacity style={styles.action} onPress={() => navigation.push('Lista')}>
+                <TouchableOpacity style={styles.action} onPress={() => navigation.navigate('Lista', {categoria: '2'})}>
                     <Text style={styles.actionText}>Idoso</Text>
                 </TouchableOpacity>
 
 
-                <TouchableOpacity style={styles.action} onPress={() => navigation.push('Upload')}>
+                <TouchableOpacity style={styles.action} onPress={() => navigation.navigate('Upload')}>
                     <Text style={styles.actionText}>Upload</Text>
                 </TouchableOpacity>
 

@@ -3,7 +3,7 @@ exports.up = function(knex) {
         table.string('id').primary();
         table.string('name').notNullable();
         table.string('whatsapp').notNullable();
-        console.log("DONE")
+        
     });
 };
 

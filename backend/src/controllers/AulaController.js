@@ -8,8 +8,9 @@ module.exports = {
         const { page = 1 } = request.query;
 
         const { categoria } = request.query;
+        console.log(categoria)
 
-        const [count] = await connection('aulas').count();
+        const [count] = await connection('aulas').count().where('categoria', categoria);
 
         const aulas = await connection('aulas')
         .limit(5)
@@ -25,8 +26,8 @@ module.exports = {
   
     async create(request, response){
         
-        console.log(multer.storage)
-        const { title, description, categoria, intensidade } = request.body;
+        
+        const { title, description, categoria} = request.body;
         const professor_id = request.headers.authorization;
         const url = "../../tmp"
         const [id] = await connection('aulas').insert({

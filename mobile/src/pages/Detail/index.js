@@ -22,9 +22,6 @@ export default function Details(){
     }
 
     const title = (unescape(aula.title))
-    console.log("AULA")
-    console.log(title)
-    
     
     return(
         

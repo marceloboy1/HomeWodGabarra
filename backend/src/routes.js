@@ -34,6 +34,7 @@ routes.post('/professores', celebrate({
 routes.get('/aulas', celebrate({
     [Segments.QUERY]: Joi.object().keys({
         page: Joi.number(),
+        categoria: Joi.string(),
     })
 }), AulaController.index);
 

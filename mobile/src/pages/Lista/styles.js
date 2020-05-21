@@ -66,9 +66,6 @@ export default StyleSheet.create({
     },
     
     detailsButton:{
-        flexDirection: 'row',
-        justifyContent: "space-between",
-        alignItems: 'center',
         borderRadius: 8,
     },
 

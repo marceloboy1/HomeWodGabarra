@@ -29,7 +29,7 @@ class BtnGroup extends React.Component {
       
       this.setState({selectedIndex})
       this.props.onChange(selectedIndex)
-      console.log(selectedIndex)
+      
     }
   
 
@@ -88,7 +88,6 @@ export default function Upload() {
     }
 
     if (file.uri){
-      console.log("TESTE")
       setVideo(file)
       return( 
       <View style={styles.container}>
@@ -139,14 +138,10 @@ export default function Upload() {
 
   function handleIntensidade(receivedIndex){
     setIntensidade(receivedIndex);
-    console.log("Intensidade");
-    console.log(intensidade)
   }
 
   function handleCategoria(receivedIndex){
     setCategoria(receivedIndex);
-    console.log("Categoria");
-    console.log(categoria)
   }
 
   async function uploadVideo(){

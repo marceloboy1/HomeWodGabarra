@@ -8,12 +8,12 @@ module.exports = {
         
         const intensidade = req.params.intensidade
         const categoria = req.params.categoria
-        console.log("Categoria")
-        console.log(categoria)
-        console.log("Instensidade")
-        console.log(intensidade)
+        // console.log("Categoria")
+        // console.log(categoria)
+        // console.log("Instensidade")
+        // console.log(intensidade)
         const title = req.params.title
-        console.log(title)
+        // console.log(title)
         const path = '../backend/tmp/'+title+'.mp4'
         const stat = fs.statSync(path)
         const fileSize = stat.size
