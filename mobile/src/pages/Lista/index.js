@@ -3,6 +3,7 @@ import { View, Image, Text, FlatList } from 'react-native'
 import {Feather} from '@expo/vector-icons'
 import {useNavigation} from '@react-navigation/native'
 import logoImg from '../../assets/logo.png'
+import * as VideoThumbnails from 'expo-video-thumbnails';
 import { Video } from 'expo-av';
 
 
@@ -53,6 +54,7 @@ export default function Lista(){
         loadaulas();
     }, []);
 
+
     return(
         <View style={styles.container}>
             <View style={styles.header}>
@@ -77,20 +79,22 @@ export default function Lista(){
                 renderItem={({ item: aula }) => (
 
                     <View style={styles.aula}>
-                                        
-                        <Text style={styles.aulaProperty}>{aula.title}</Text>
-                      
+
                         <TouchableOpacity 
                             style={styles.detailsButton} 
                             onPress={() => navigateToDetail(aula)}
-                        >
-                            <Video
+                        >               
+                            <Text style={styles.aulaProperty}>{aula.title}</Text>
+                      
+                      
+                            {/* <Video
                                 source={{ uri: `http://192.168.0.106:3333/video/${aula.title}`}}
                                 rate={1.0}
                                 volume={1.0}
                                 muted={false}
                                 style={{ width: 300, height: 300 }}
-                            />
+                            /> */}
+
                         </TouchableOpacity>
                     </View>
                 )}

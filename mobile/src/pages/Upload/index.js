@@ -76,7 +76,7 @@ export default function Upload() {
 
     console.log("Abrindo biblioteca"); 
     const file = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Video,
+      mediaTypes: ImagePicker.MediaTypeOptions.Videos,
     });
     if (file.cancelled){
       console.log("CANCELADO");
@@ -117,7 +117,7 @@ export default function Upload() {
     body.append('file', movVideo);
     body.append('title', title);
     body.append('description', description);
-    body.append('intensidade', intensidade);
+    // body.append('intensidade', intensidade);
     body.append('categoria', categoria);
 
     fetch('http://192.168.0.106:3333/upload', {
@@ -170,7 +170,7 @@ export default function Upload() {
 
 
       <BtnGroup onChange={handleCategoria} buttons={["Pilates", "Crossfit", "Idoso"]} />
-      <BtnGroup onChange={handleIntensidade} buttons={["Iniciante", "Intermediário", "Avançado"]} />
+      {/* <BtnGroup onChange={handleIntensidade} buttons={["Iniciante", "Intermediário", "Avançado"]} /> */}
 
       
       <TouchableOpacity onPress={videoPicker} style={styles.action}>

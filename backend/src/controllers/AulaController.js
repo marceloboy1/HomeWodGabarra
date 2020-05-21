@@ -7,11 +7,14 @@ module.exports = {
         
         const { page = 1 } = request.query;
 
+        const { categoria } = request.query;
+
         const [count] = await connection('aulas').count();
 
         const aulas = await connection('aulas')
         .limit(5)
         .offset((page -1) * 5)
+        .where('categoria', categoria)
         .select(['aulas.*']);
 
         response.header('X-Total-Count', count['count(*)'])
@@ -29,7 +32,7 @@ module.exports = {
         const [id] = await connection('aulas').insert({
             title,
             description,
-            intensidade,
+            // intensidade,
             categoria,
             professor_id,
             url,
